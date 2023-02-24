@@ -55,5 +55,3 @@ services:
 volumes:
   db:
   grafana-data:
-
-  docker compose exec 98f3c3d1013b bash /app/docker-init.sh
