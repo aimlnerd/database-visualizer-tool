@@ -1,0 +1,59 @@
+version: '3.6'
+services:
+  postgres:
+    image: postgres:15.2
+    restart: on-failure
+    ports:
+      - "5436:5432"
+    environment:
+      POSTGRES_DB: superset
+      POSTGRES_PASSWORD: superset
+      POSTGRES_USER: superset
+    volumes:
+      - db:/media/deepak/00C8DEF7C8DEEA44/Work/Github/database-visualizer-tool/data
+  
+  postgres-client:
+    image: dpage/pgadmin4:6.20
+    ports:
+      - "9001:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    depends_on:
+      - postgres
+    container_name: postgres-client
+
+  superset:
+    image: apache/superset:latest
+    restart: on-failure
+    environment:
+      - SUPERSET_PORT=8088
+      - username=admin
+      - firstname=admin
+      - lastname=admin
+      - email=admin@admin.com
+      - password=admin
+    ports:
+      - "8088:8088"
+    depends_on:
+      - postgres
+    command: gunicorn --bind 0.0.0.0:8088 "superset.app:create_app()"
+    volumes:
+      - ./config/:/app/pythonpath/
+  
+  grafana:
+      image: grafana/grafana:7.5.7
+      ports:
+        - 3010:3000
+      restart: unless-stopped
+      volumes:
+        - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+        - grafana-data:/var/lib/grafana
+      depends_on:
+        - postgres
+
+volumes:
+  db:
+  grafana-data:
+
+  docker compose exec 98f3c3d1013b bash /app/docker-init.sh
