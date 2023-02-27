@@ -1,7 +1,7 @@
 # database-visualizer-tool
 This repo demonstrate how to use graphana to easily create dashboard in graphana from data in postgres without redeveloping dashboard UI using angular/react etc
 
-Go to the below blog for detailed instructions on how to setup the docker compose and create plots in Graphana
+Go to the below blog for detailed instructions on how to setup the docker compose in this repo and create plots in Graphana
 https://machinelearninglab.blogspot.com/2023/02/setup-open-source-dashboard-for-machine.html
 
 
