@@ -17,6 +17,33 @@ CREATE TABLE total_cases (
   PRIMARY KEY (datestamp)
 );
 
+CREATE TABLE feature_drift_mmd (
+  datestamp VARCHAR(50),
+  feature_drift_mmd VARCHAR(50),
+  PRIMARY KEY (datestamp)
+);
+
+CREATE TABLE ner_accuracy_f1 (
+  datestamp VARCHAR(50),
+  ner_accuracy_f1 VARCHAR(50),
+  PRIMARY KEY (datestamp)
+);
+
+CREATE TABLE target_drift_mmd (
+  datestamp VARCHAR(50),
+  target_drift_MMD VARCHAR(50),
+  PRIMARY KEY (datestamp)
+);
+
+ALTER TABLE target_drift_mmd ALTER COLUMN datestamp TYPE DATE 
+using to_date(datestamp, 'MM-DD-YYYY');
+
+ALTER TABLE ner_accuracy_f1 ALTER COLUMN datestamp TYPE DATE 
+using to_date(datestamp, 'MM-DD-YYYY');
+
+ALTER TABLE feature_drift_mmd ALTER COLUMN datestamp TYPE DATE 
+using to_date(datestamp, 'MM-DD-YYYY');
+
 ALTER TABLE connected_users ALTER COLUMN datestamp TYPE DATE 
 using to_date(datestamp, 'MM-DD-YYYY');
 
