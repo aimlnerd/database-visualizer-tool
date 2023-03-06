@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: superset
       POSTGRES_USER: superset
     volumes:
-      - db:/media/deepak/00C8DEF7C8DEEA44/Work/Github/database-visualizer-tool/data
+      - db:/var/lib/postgresql/data
   
   postgres-client:
     image: dpage/pgadmin4:6.20
